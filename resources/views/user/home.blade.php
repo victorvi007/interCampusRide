@@ -166,7 +166,7 @@
             <div class="px-4">
                 <a class="block text-center bg-primary  py-4 rounded text-light font-bold" ">CHECK</a>
             </div>
-        </div> --}}
+        </div> --}} 
 
 
     </div>
