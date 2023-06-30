@@ -16,9 +16,9 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-2 space-y-6">
-                  <a href="assets/images/background.jpg">
+                  <a href="{{ $ride->car_image }}">
 
-                      <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 h-96 rounded" style="background-image: url('assets/images/background.jpg');">
+                      <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 h-96 rounded" style="background-image: url('{{ $ride->car_image }}');">
 
                       </p>
                   </a>

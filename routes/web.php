@@ -29,5 +29,5 @@ Route::get('/signup',[RegisterController::class,'register'])->name('register');
 Route::post('/store-signup',[RegisterController::class,'store_register'])->name('store_register');
 
 Route::middleware('auth')->group(function(){
-    Route::get('/booking',[BookingController::class, 'booking'])->name('booking');
+    Route::get('/booking/{id}',[BookingController::class, 'booking'])->name('booking');
 });

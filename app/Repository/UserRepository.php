@@ -18,6 +18,7 @@ class UserRepository{
             'firstname'=>$data->firstname,
             'lastname'=>$data->lastname,
             'email'=>$data->email,
+            'avater'=>"http://127.0.0.1:8000/assets/images/user-image.jpg",
             'reg_number'=>$data->reg_number,
             'address'=>$data->address,
             'faculty'=>$data->faculty,

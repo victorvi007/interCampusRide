@@ -17,15 +17,25 @@ return new class extends Migration
             $table->string('ride_id');
             $table->string('banner');
             $table->string('price');
+            $table->string('info');
+            $table->string('car_image');
+            $table->string('car_plate_number');
             $table->integer('seat_total');
             $table->string('seat_available');
             $table->string('seat_arrangement');
             $table->string('year');
             $table->string('month');
             $table->string('day');
-            $table->string('hour');
-            $table->string('minuite');
-            $table->string('second');
+            $table->string('countdown');
+            $table->string('depature_hour');
+            $table->string('depature_minuite');
+            $table->string('depature_second');
+            $table->string('depature_meridiem');
+            $table->string('eta_hour');
+            $table->string('eta_minuite');
+            $table->string('eta_second');
+            $table->string('eta_meridiem');
+
             $table->timestamps();
         });
     }

@@ -14,4 +14,7 @@ class RideRepository {
     public function getAllRides(){
         return $this->model->get();
     }
+    public function getRide($id){
+        return $this->model->where('id',$id)->firstOrFail();
+    }
 }

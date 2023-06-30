@@ -16,6 +16,7 @@
         }
     </style>
     @stack('script')
+    @stack('timer-scripts')
     <title>Document</title>
 </head>
 <body>

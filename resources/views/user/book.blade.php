@@ -3,7 +3,7 @@
 <div class="">
 
     <div class="screen w-full ">
-        <div class="h-52 w-full"style="background-image:url('assets/images/background.jpg'); background-size:cover;background-repeat:no-repeat" ></div>
+        <div class="h-52 w-full"style="background-image:url('{{ $ride->banner }}'); background-size:cover;background-repeat:no-repeat" ></div>
 
         <div class="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-5 gap-4  m-4 md:mx-8">
 
@@ -13,13 +13,13 @@
                 <h1 class="text-center text-2xl font-bold my-4">Driver Details</h1>
                 <div class="profile order my-4">
                     <div class="">
-                        <img src="assets/images/user-image.jpg" class="h-42  w-42 m-1" alt="">
-                        <h2 class="my-auto  text-2xl"> <i class="fa-light fa-signature mx-2 text-primary"></i>Driver Deo</h2>
+                        <img src="{{ $ride->user->avater }}" class="h-42  w-42 m-1" alt="">
+                        <h2 class="my-auto  text-2xl"> <i class="fa-light fa-signature mx-2 text-primary"></i>{{ $ride->user->firstname }} {{ $ride->lastname }}</h2>
                         <p class="my-2"> <i class="fa-solid fa-phone-rotary mx-2 text-primary"></i> +234 812 0844 654</p>
-                        <p class="my-2"> <i class="fa-sharp fa-solid fa-location-dot mx-2 text-primary"></i> 204 Rosser Ave Waynesboro</p>
-                        <p class="my-2"> <i class="fa-light fa-id-badge mx-2 text-primary"></i> 2017/123456</p>
-                        <p class="my-2"> <i class="fa-solid fa-school mx-2 text-primary"></i> Enginering</p>
-                        <p class="my-2"> <i class="fa-solid fa-building mx-2 text-primary"></i> Electronic Enginering</p>
+                        <p class="my-2"> <i class="fa-sharp fa-solid fa-location-dot mx-2 text-primary"></i> {{ $ride->user->address }}</p>
+                        <p class="my-2"> <i class="fa-light fa-id-badge mx-2 text-primary"></i> {{ $ride->user->reg_number }}</p>
+                        <p class="my-2"> <i class="fa-solid fa-school mx-2 text-primary"></i> {{ $ride->user->faculty }}</p>
+                        <p class="my-2"> <i class="fa-solid fa-building mx-2 text-primary"></i> {{ $ride->user->department }}</p>
                         <p class="text-yellow">
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
@@ -35,16 +35,26 @@
 
                     <div class="title flex justify-between px-4 mt-4">
                         <div class="flex">
-                            <img src="assets/images/user-image.jpg" class="h-16 rounded-full w-16 rounded-full m-1" alt="">
-                            <p class="my-auto font-bold text-sm">Driver Deo</p>
+                            <img src="{{ $ride->user->avater }}" class="h-16 rounded-full w-16 rounded-full m-1" alt="">
+                            <p class="my-auto font-bold text-sm">{{ $ride->user->firstname }} {{ $ride->lastname }}</p>
                         </div>
                         <div class="my-auto">
-                            <p>2hr:30m</p>
+                            <p id="countDown-{{ $ride->id }}"></p>
+                        </div>
+                    </div>
+                    <div class="title flex justify-between px-4 mt-4">
+                        <div class="flex">
+                            {{-- <img src="{{ $ride->user->avater }}" class="h-16 rounded-full w-16 rounded-full m-1" alt="">
+                            <p class="my-auto font-bold text-sm">{{ $ride->user->firstname }} {{ $ride->lastname }}</p> --}}
+                        </div>
+                        <div class="my-auto">
+                            <p class="my-auto font-bold text-sm">{{ $ride->day }} {{ $ride->month }} {{ $ride->year }}</p>
                         </div>
                     </div>
                     <div class="time flex justify-between my-4  px-4">
                         <div class="take-off-time">
-                            <h4 class="font-bold text-xl">7:25</h4>
+                            <h4 class="font-bold text-xl">{{ $ride->depature_hour }}:{{ $ride->depature_minuite }}:<span
+                                class="text-xs font-semibold">{{ $ride->depature_meridiem }}</span></h4>
                             <p class=" text-xs font-semibold">UNEC</p>
                         </div>
 
@@ -53,7 +63,8 @@
 
                     </div>
                         <div class="arrival-time">
-                            <h4 class="font-bold text-xl">8:45</h4>
+                            <h4 class="font-bold text-xl">{{ $ride->eta_hour }}:{{ $ride->eta_minuite }}:<span
+                                class="text-xs font-semibold">{{ $ride->eta_meridiem }}</span></h4>
                             <p class=" text-xs font-semibold text-end">UNN</p>
                         </div>
                     </div>
@@ -61,12 +72,12 @@
                         <div class="text-start">
 
                             <p class="my-auto font-bold text-xl">seats</p>
-                            <p class="my-auto font-semibold text-md">4</p>
+                            <p class="my-auto font-semibold text-md">{{ $ride->seat_total }}</p>
                         </div>
                         <div class="my-auto text-end">
 
                             <p class="font-bold text-xl"> Available</p>
-                            <p class="font-semibold text-md"> 2</p>
+                            <p class="font-semibold text-md"> {{ $ride->seat_available }}</p>
                         </div>
                     </div>
 
@@ -118,12 +129,12 @@
                 <div class="text-center py-6">
                     <h2 class="font-md">
                         <span class="block font-bold">Price: </span>
-                        <p class="text-4xl font-bold">₦ 5000 </p>
+                        <p class="text-4xl font-bold">₦ {{ number_format($ride->price) }} </p>
                     </h2>
                     <div class="my-4">
                         <span class="block font-bold">Note: </span>
                         <p>
-                            The cost of the fare will be subject to adjustment if you possess luggage exceeding a weight threshold of 10 kilograms. In such instances, a modification in the fare pricing structure shall be implemented to account for the additional weight, thereby ensuring a fair and equitable distribution of costs.
+                            {{ $ride->info }}
                         </p>
                      </div>
                 </div>
@@ -154,4 +165,28 @@
 
 
 </div>
+
+            @push('timer-scripts')
+            <script>
+                var countDownDate = new Date("<?php echo "$ride->countdown"; ?>").getTime();
+
+
+                setInterval(function() {
+                    var now = new Date().getTime();
+
+                    // Find the distance between now an the count down date
+                    var distance = countDownDate - now;
+
+                    // Time calculations for days, hours, minutes and seconds
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    document.getElementById("countDown-<?php echo "$ride->id"; ?>").innerHTML = `${hours}h:${minutes}m:${seconds}s`;
+
+
+                }, 1000);
+            </script>
+            @endpush
 @endsection
