@@ -27,7 +27,9 @@ Route::post('/store-login',[LoginController::class,'store_login'])->name('store_
 // Register
 Route::get('/signup',[RegisterController::class,'register'])->name('register');
 Route::post('/store-signup',[RegisterController::class,'store_register'])->name('store_register');
+Route::post('/logout',[LoginController::class,'logout'])->name('logout');
 
+Route::get('/booking/{id}',[BookingController::class, 'booking'])->name('booking');
 Route::middleware('auth')->group(function(){
-    Route::get('/booking/{id}',[BookingController::class, 'booking'])->name('booking');
+    Route::post('/store-booking',[BookingController::class,'store_booking'])->name('store_booking');
 });

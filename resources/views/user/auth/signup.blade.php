@@ -78,14 +78,14 @@
 
 
                 <div class="my-4 flex items-center">
-                    <input type="checkbox" name="rememberMe" id="rememberMe" class="h-4 w-4 mr-2">
+                    <input type="checkbox" name="remember_me" id="rememberMe" class="h-4 w-4 mr-2">
                     <label for="rememberMe">Remember Me</label>
                 </div>
                 <div class="my-4 text-end ">
-                    <button class="text-light bg-primary p-4 rounded-md w-full">Sign In</button>
+                    <button class="text-light bg-primary p-4 rounded-md w-full">Sign Up</button>
                 </div>
                 <div class="">
-                    Don't have an account? <a href="#" class="text-primary underline ">Sign Up here</a>
+                    Already have an account? <a href="{{ route('login') }}" class="text-primary underline ">Sign In here</a>
                 </div>
            </div>
         </div>

@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class LoginRequest extends FormRequest
+class BookingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,14 +21,15 @@ class LoginRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-          'email'=>['required','email','max:255'],
-          'password'=>['required','max:255','min:6']
+            'booking_id'=>['required','string','max:255'],
+            'ride_id'=>['required','string','max:255'],
+            'seat_id'=>['required','string','max:255'],
+            'fee'=>['required','string','max:255'],
+            'payment_method'=>['required','string','max:255'],
         ];
-
-
     }
 
     protected function failedValidation(Validator $validator)
@@ -39,6 +40,4 @@ class LoginRequest extends FormRequest
         'status' => 'error'
         ], 200));
     }
-
-
 }

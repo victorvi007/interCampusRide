@@ -6,7 +6,7 @@
 
 
             @foreach ($rides as $ride)
-       
+
 
                 <div class="card my-4 pb-6">
                     <div
@@ -20,16 +20,16 @@
                             </p>
                         </div>
                         <div class="my-auto">
-                            <p id="countDown-{{ $ride->id }}"></p>
+                            {{-- <p id="countDown-{{ $ride->id }}"></p>
                             <input type="hidden" name="" id="eta_date_countdown_{{ $ride->id }}"
-                                value="{{ $ride->countdown }}" onload="alert('hello')">
+                                value="{{ $ride->countdown }}" onload="alert('hello')"> --}}
                         </div>
                     </div>
                     <div class="time flex justify-between my-4  px-4">
                         <div class="take-off-time">
                             <h4 class="font-bold text-xl">{{ $ride->depature_hour }}:{{ $ride->depature_minuite }}:<span
                                     class="text-xs font-semibold">{{ $ride->depature_meridiem }}</span> </h4>
-                            <p class=" text-xs font-semibold">UNEC</p>
+                            <p class=" text-xs font-semibold">{{ $ride->from }}</p>
                         </div>
 
                         <div class="path relative  w-2/3 rounded-full h-1 my-auto bg-primary/[.1]" style="">
@@ -38,7 +38,7 @@
                         <div class="arrival-time">
                             <h4 class="font-bold text-xl">{{ $ride->eta_hour }}:{{ $ride->eta_minuite }}:<span
                                     class="text-xs font-semibold">{{ $ride->eta_meridiem }}</span></h4>
-                            <p class=" text-xs font-semibold text-end">UNN</p>
+                            <p class=" text-xs font-semibold text-end">{{ $ride->to  }}</p>
                         </div>
                     </div>
                     <div class="seats flex justify-between my-4 px-4">
@@ -71,25 +71,25 @@
 
             {{-- @push('timer-scripts') --}}
             <script>
-                var countDownDate = new Date("<?php echo "$ride->countdown"; ?>").getTime();
+                // var countDownDate = new Date("<?php echo "$ride->countdown"; ?>").getTime();
 
 
-                setInterval(function() {
-                    var now = new Date().getTime();
+                // setInterval(function() {
+                //     var now = new Date().getTime();
 
-                    // Find the distance between now an the count down date
-                    var distance = countDownDate - now;
+                //     // Find the distance between now an the count down date
+                //     var distance = countDownDate - now;
 
-                    // Time calculations for days, hours, minutes and seconds
-                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                //     // Time calculations for days, hours, minutes and seconds
+                //     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                //     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                //     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                //     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                    document.getElementById("countDown-<?php echo "$ride->id"; ?>").innerHTML = `${hours}h:${minutes}m:${seconds}s`;
+                //     document.getElementById("countDown-<?php echo "$ride->id"; ?>").innerHTML = `${hours}h:${minutes}m:${seconds}s`;
 
 
-                }, 1000);
+                // }, 1000);
             </script>
             {{-- @endpush --}}
      @endforeach

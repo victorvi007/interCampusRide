@@ -18,6 +18,9 @@ class RideFactory extends Factory
     {
         $depatureHour = rand(4,6);
 
+        $from = 'UNEC';
+        $to = 'UNN';
+
 
             $meridiem = ['AM','PM'];
             $month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -46,14 +49,16 @@ class RideFactory extends Factory
 
         return [
             'user_id'=> 1,
-            'ride_id'=> fake()->text(),
+            'ride_id'=> getId(),
             'price'=>rand(500,2000),
             'banner'=>'http://127.0.0.1:8000/assets/images/background.jpg',
             'info'=>fake()->text(),
             'car_image'=>'http://127.0.0.1:8000/assets/images/background.jpg',
             'car_plate_number'=>'http://127.0.0.1:8000/assets/images/background.jpg',
+            'from'=> $from,
+            'to'=> $to,
             'seat_total'=> 4,
-            'seat_available'=> 3,
+            'seat_available'=> rand(1,3),
             'seat_arrangement'=> fake()->name(),
             'year'=> date('Y'),
             'month'=> $setMonth,

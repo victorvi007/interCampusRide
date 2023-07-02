@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('lastname');
             $table->string('email')->unique();
             $table->string('reg_number')->unique();
+            $table->string('phone')->unique();
             $table->string('avater');
             $table->float('balance')->default(0.0);
             $table->string('address');

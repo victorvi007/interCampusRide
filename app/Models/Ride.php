@@ -42,4 +42,8 @@ class Ride extends Model
         return $this->belongsTo(User::class,'user_id','id');
     }
 
+    // public function booking(){
+    //     return $this->hasMany(User::class,'user_id','id');
+    // }
+
 }

@@ -15,7 +15,7 @@ class RegisterController extends Controller
 
     public function store_register(RegisterRequest $registerRequest,UserRepository $userRepository){
         $storeData = $userRepository->createUser($registerRequest);
-        auth()->attempt($registerRequest->only('email','password'));
+        auth()->attempt($registerRequest->only('email','password'),$registerRequest->remember_me);
         if($storeData){
             return redirect()->route('home');
         };

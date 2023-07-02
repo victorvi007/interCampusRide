@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('banner');
             $table->string('price');
             $table->string('info');
+            $table->string('from');
+            $table->string('to');
             $table->string('car_image');
             $table->string('car_plate_number');
             $table->integer('seat_total');

@@ -24,6 +24,7 @@ class UserFactory extends Factory
             'email'=>fake()->unique()->safeEmail(),
             'reg_number'=>'2017/'.rand(200000,299999),
             'balance'=>rand(1000,5000),
+            'phone'=>rand(123456789098,234567890987),
             'avater'=>'http://127.0.0.1:8000/assets/images/user-image.jpg',
             'address'=>fake()->address(),
             'faculty'=>'Engineering',
