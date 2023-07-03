@@ -24,7 +24,7 @@ class BookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'booking_id'=>['required','string','max:255'],
+            // 'booking_id'=>['required','string','max:255'],
             'ride_id'=>['required','string','max:255'],
             'seat_id'=>['required','string','max:255'],
             'fee'=>['required','string','max:255'],

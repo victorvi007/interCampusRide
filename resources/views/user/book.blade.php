@@ -2,7 +2,8 @@
 @section('content')
 <form class="" action="{{ route('store_booking') }}" method="POST">
     @csrf
-    <input type="hidden" name="ride_id" value="{{ $ride->ride_id }}">
+    <input type="hidden" name="ride_id" value="{{ $ride->ride_id }}" id="ride_id">
+    <input type="hidden" name="fee" value="{{ $ride->price }}" id="fee">
 
     <div class="screen w-full ">
         <div class="h-52 w-full"style="background-image:url('{{ $ride->banner }}'); background-size:cover;background-repeat:no-repeat" ></div>
@@ -83,30 +84,30 @@
                         </div>
                     </div>
 
-                    <div class="text-center my-6 px-4">
+                    <div class="text-center my-6 px-4" id="seats">
                         <h2 class="text-lg my-4 font-bold">Select a seating position</h2>
                         <div class="grid grid-cols-2 w-full md:w-1/4 mx-auto ">
                             <label for="seat-1" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary/[.6] m-2 mx-auto">1</label>
-                            <input type="radio" name="seat" id="seat-1" class="seat hidden " value="1">
+                            <input type="radio" name="seat_id" id="seat-1" class="seat hidden " value="1">
                             <label for="seat-2" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">2</label>
-                            <input type="radio" name="seat" id="seat-2" class="seat hidden " value="2">
+                            <input type="radio" name="seat_id" id="seat-2" class="seat hidden " value="2">
 
                         </div>
                         <div class="grid grid-cols-3 w-full md:w-1/4 mx-auto ">
                             <label for="seat-3" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">3</label>
-                            <input type="radio" name="seat" id="seat-3" class="seat hidden " value="3">
+                            <input type="radio" name="seat_id" id="seat-3" class="seat hidden " value="3">
                             <label for="seat-4" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">4</label>
-                            <input type="radio" name="seat" id="seat-4" class="seat hidden " value="4">
+                            <input type="radio" name="seat_id" id="seat-4" class="seat hidden " value="4">
                             <label for="seat-5" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">5</label>
-                            <input type="radio" name="seat" id="seat-5" class="seat hidden " value="5">
+                            <input type="radio" name="seat_id" id="seat-5" class="seat hidden " value="5">
                         </div>
                         <div class="grid grid-cols-3 w-full md:w-1/4 mx-auto ">
                             <label for="seat-6" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">6</label>
-                            <input type="radio" name="seat" id="seat-6" class="seat hidden " value="6">
+                            <input type="radio" name="seat_id" id="seat-6" class="seat hidden " value="6">
                             <label for="seat-7" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">7</label>
-                            <input type="radio" name="seat" id="seat-7" class="seat hidden " value="7">
+                            <input type="radio" name="seat_id" id="seat-7" class="seat hidden " value="7">
                             <label for="seat-8" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">8</label>
-                            <input type="radio" name="seat" id="seat-8" class="seat hidden " value="8">
+                            <input type="radio" name="seat_id" id="seat-8" class="seat hidden " value="8">
                         </div>
                     </div>
                     <div class="car-details my-8 px-4 text-center">
@@ -124,7 +125,7 @@
                         </div>
                     </div>
                     <div class="px-4 my-8">
-                        <button class=" text-center w-full bg-primary  py-4 rounded text-light font-bold" id="submit">Book</button>
+                        <button class=" text-center w-full bg-primary  py-4 rounded text-light font-bold" id="submitBtn">Book</button>
                     </div>
             </div>
             <div class=" col-span-3 md:col-span-1 p-4 order order-2 md:order-3 card">
@@ -144,11 +145,11 @@
                     <h1 class="text-center text-lg my-4 font-bold">Pyment method</h1>
                 </div>
                 <div class="flex items-center mb-4">
-                    <input id="default-radio-1" type="radio" value="off" name="payment_method" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
+                    <input id="default-radio-1" type="radio" value="off" name="payment_method" class="payment_method w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
                     <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pay on Pickup</label>
                 </div>
                 <div class="flex items-center">
-                    <input id="default-radio-2" type="radio" value="on" name="payment_method" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:focus:ring-blue-600 dark:ring-offset-gray-800  dark:border-gray-600">
+                    <input id="default-radio-2" type="radio" value="on" name="payment_method" class="payment_method w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:focus:ring-blue-600 dark:ring-offset-gray-800  dark:border-gray-600">
                     <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pay Now</label>
                 </div>
             </div>
@@ -194,5 +195,123 @@
             </script>
             @endpush
 
-            
+              <script>
+                // console.log( $("#seats .seat").val());
+        $(document).ready(function() {
+            let seats = document.querySelectorAll('.seat');
+            let paymentMethods = document.querySelectorAll('.payment_method');
+            let seatValue = "";
+            let paymentMethodValue = "";
+            seats.forEach(seat=>{
+                seat.addEventListener('change',()=>{
+                        seatValue = seat.value;
+                    })
+            })
+
+            paymentMethods.forEach(paymentMethod=>{
+                paymentMethod.addEventListener('change',()=>{
+                    paymentMethodValue = paymentMethod.value;
+                    console.log(paymentMethodValue);
+                    })
+            })
+
+
+            $("#submitBtn").click(function(e) {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                e.preventDefault();
+                var ride_id = $("#ride_id").val();
+                var payment_method = paymentMethodValue;
+                let seat = seatValue;
+                var fee = $("#fee").val();
+
+
+
+
+
+
+                $.ajax({
+                    url: '{{ route('store_booking') }}',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        ride_id: ride_id,
+                        payment_method: payment_method,
+                        seat_id:seat,
+                        fee:fee
+                    },
+
+                    success: function(data) {
+                        // console.log(data);
+
+
+                        if (data.status == 'error') {
+
+                            if (data[0]['payment_method'] != null) {
+                                iziToast.error({
+                                    message: data[0]['email'][0],
+                                    position: 'topCenter',
+                                    color: '#dc3545',
+                                    messageColor: '#fff',
+                                    theme: 'dark',
+                                });
+                            }
+                            if (data[0]['seat_id'] != null) {
+                                iziToast.error({
+                                    message: data[0]['seat_id'][0],
+                                    position: 'topCenter',
+                                    color: '#dc3545',
+                                    messageColor: '#fff',
+                                    theme: 'dark',
+                                });
+                            }
+                        }
+                        if (data.status == 'success') {
+                            iziToast.success({
+                                message: data['msg'],
+                                position: 'topCenter',
+                                color: '#198754',
+                                messageColor: '#fff',
+                                theme: 'dark',
+                            });
+
+                            setInterval(() => {
+                                window.location.replace(data['next'])
+                            }, 3000);
+                        }
+
+                        if (data.status == 'warning') {
+                            iziToast.error({
+                                message: data['msg'],
+                                position: 'topCenter',
+                                color: '#dc3545',
+                                messageColor: '#fff',
+                                theme: 'dark',
+                            });
+
+
+                        }
+
+
+
+
+
+
+
+
+                    },
+
+
+                });
+
+            });
+
+
+        });
+    </script>
 @endsection
