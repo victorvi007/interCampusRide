@@ -84,31 +84,52 @@
                         </div>
                     </div>
 
+
+
                     <div class="text-center my-6 px-4" id="seats">
                         <h2 class="text-lg my-4 font-bold">Select a seating position</h2>
-                        <div class="grid grid-cols-2 w-full md:w-1/4 mx-auto ">
-                            <label for="seat-1" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary/[.6] m-2 mx-auto">1</label>
-                            <input type="radio" name="seat_id" id="seat-1" class="seat hidden " value="1">
-                            <label for="seat-2" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">2</label>
-                            <input type="radio" name="seat_id" id="seat-2" class="seat hidden " value="2">
+                        @if($ride->seat_total == 4)
 
-                        </div>
-                        <div class="grid grid-cols-3 w-full md:w-1/4 mx-auto ">
-                            <label for="seat-3" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">3</label>
-                            <input type="radio" name="seat_id" id="seat-3" class="seat hidden " value="3">
-                            <label for="seat-4" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">4</label>
-                            <input type="radio" name="seat_id" id="seat-4" class="seat hidden " value="4">
-                            <label for="seat-5" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">5</label>
-                            <input type="radio" name="seat_id" id="seat-5" class="seat hidden " value="5">
-                        </div>
-                        <div class="grid grid-cols-3 w-full md:w-1/4 mx-auto ">
-                            <label for="seat-6" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">6</label>
-                            <input type="radio" name="seat_id" id="seat-6" class="seat hidden " value="6">
-                            <label for="seat-7" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">7</label>
-                            <input type="radio" name="seat_id" id="seat-7" class="seat hidden " value="7">
-                            <label for="seat-8" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">8</label>
-                            <input type="radio" name="seat_id" id="seat-8" class="seat hidden " value="8">
-                        </div>
+                                <div class="grid grid-cols-2 w-full md:w-1/4 mx-auto ">
+                                    <label for="seat-1" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary/[.6] m-2 mx-auto">1</label>
+                                    <input type="radio" name="seat_id" id="seat-1" class="seat hidden " value="1" disabled>
+                                    <label for="seat-2" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">2</label>
+                                    <input type="radio" name="seat_id" id="seat-2" class="seat hidden " value="seat_1">
+
+                                </div>
+                                <div class="grid grid-cols-3 w-full md:w-1/4 mx-auto ">
+                                    <label for="seat-3" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">3</label>
+                                    <input type="radio" name="seat_id" id="seat-3" class="seat hidden " value="seat_2">
+                                    <label for="seat-4" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">4</label>
+                                    <input type="radio" name="seat_id" id="seat-4" class="seat hidden " value="seat_3">
+                                    <label for="seat-5" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">5</label>
+                                    <input type="radio" name="seat_id" id="seat-5" class="seat hidden " value="seat_4">
+                                </div>
+                    @elseif ($ride->seat_totla == 7)
+                            <div class="grid grid-cols-2 w-full md:w-1/4 mx-auto ">
+                                <label for="seat-1" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary/[.6] m-2 mx-auto">1</label>
+                                <input type="radio" name="seat_id" id="seat-1" class="seat hidden " value="1" disabled>
+                                <label for="seat-2" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">2</label>
+                                <input type="radio" name="seat_id" id="seat-2" class="seat hidden " value="seat_1">
+
+                            </div>
+                            <div class="grid grid-cols-3 w-full md:w-1/4 mx-auto ">
+                                <label for="seat-3" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">3</label>
+                                <input type="radio" name="seat_id" id="seat-3" class="seat hidden " value="seat_2">
+                                <label for="seat-4" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">4</label>
+                                <input type="radio" name="seat_id" id="seat-4" class="seat hidden " value="seat_3">
+                                <label for="seat-5" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">5</label>
+                                <input type="radio" name="seat_id" id="seat-5" class="seat hidden " value="seat_4">
+                            </div>
+                            <div class="grid grid-cols-3 w-full md:w-1/4 mx-auto ">
+                                    <label for="seat-6" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">6</label>
+                                    <input type="radio" name="seat_id" id="seat-6" class="seat hidden " value="seat_5">
+                                    <label for="seat-7" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">7</label>
+                                    <input type="radio" name="seat_id" id="seat-7" class="seat hidden " value="seat_6">
+                                    <label for="seat-8" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">8</label>
+                                    <input type="radio" name="seat_id" id="seat-8" class="seat hidden " value="seat_7">
+                            </div>
+                            @endif
                     </div>
                     <div class="car-details my-8 px-4 text-center">
                         <h3 class="text-lg my-4 font-bold">Car Details</h3>
@@ -305,6 +326,27 @@
 
 
                     },
+
+                    // error:function(data){
+                    //     console.log(data.responseJSON);
+                    // }
+
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        if(errorThrown == 'Unauthorized'){
+
+                            iziToast.error({
+                                message: 'You are not loged in',
+                                position: 'topCenter',
+                                color: '#dc3545',
+                                messageColor: '#fff',
+                                theme: 'dark',
+                            });
+
+                            setInterval(() => {
+                                window.location.replace({{ route('login') }} )
+                            }, 3000);
+                        };
+                    }
 
 
                 });

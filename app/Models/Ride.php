@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Seat;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ride extends Model
 {
@@ -42,8 +43,12 @@ class Ride extends Model
         return $this->belongsTo(User::class,'user_id','id');
     }
 
-    // public function booking(){
-    //     return $this->hasMany(User::class,'user_id','id');
-    // }
+    public function booking(){
+        return $this->hasMany(User::class,'user_id','id');
+    }
+
+    public function seats(){
+        return $this->hasOne(Seat::class,'ride_id');
+    }
 
 }

@@ -15,8 +15,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory(1)->create();
+        $tests = Ride::factory(3)->create();
 
-        Ride::factory(3)->create();
+        foreach($tests as $test){
+             \App\Models\Seat::factory()->create([
+                'ride_id' => $test->ride_id,
+            ]);
+        }
+
+
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
