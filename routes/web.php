@@ -32,5 +32,5 @@ Route::post('/logout',[LoginController::class,'logout'])->name('logout');
 Route::get('/booking/{id}',[BookingController::class, 'booking'])->name('booking');
 Route::middleware('auth')->group(function(){
     Route::post('/store-booking',[BookingController::class,'store_booking'])->name('store_booking');
-    Route::post('/booking/log',[BookingController::class,'store_booking'])->name('store_booking');
+    Route::get('/log',[BookingController::class,'booking_log'])->name('booking_log');
 });

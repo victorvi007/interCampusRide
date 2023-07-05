@@ -1,9 +1,11 @@
 @extends('user.layout.app')
 @section('content')
-<form class="" action="{{ route('store_booking') }}" method="POST">
+<div class="" action="{{ route('store_booking') }}" method="POST">
     @csrf
     <input type="hidden" name="ride_id" value="{{ $ride->ride_id }}" id="ride_id">
     <input type="hidden" name="fee" value="{{ $ride->price }}" id="fee">
+    <input type="hidden" name="seat_booked" value="{{ $ride->seat_booked }}" id="seat_booked">
+
 
     <div class="screen w-full ">
         <div class="h-52 w-full"style="background-image:url('{{ $ride->banner }}'); background-size:cover;background-repeat:no-repeat" ></div>
@@ -80,7 +82,7 @@
                         <div class="my-auto text-end">
 
                             <p class="font-bold text-xl"> Available</p>
-                            <p class="font-semibold text-md"> {{ $ride->seat_available }}</p>
+                            <p class="font-semibold text-md"> {{$ride->seat_total - $ride->seat_booked }}</p>
                         </div>
                     </div>
 
@@ -92,42 +94,46 @@
 
                                 <div class="grid grid-cols-2 w-full md:w-1/4 mx-auto ">
                                     <label for="seat-1" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary/[.6] m-2 mx-auto">1</label>
-                                    <input type="radio" name="seat_id" id="seat-1" class="seat hidden " value="1" disabled>
-                                    <label for="seat-2" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">2</label>
-                                    <input type="radio" name="seat_id" id="seat-2" class="seat hidden " value="seat_1">
+                                    <input type="radio" name="seat_id" id="seat-1" class="seat hidden " value="" disabled>
+
+                                    <label for="seat-2" class="block p-3 w-10 rounded text-light cursor-pointer  m-2 mx-auto @if($ride->seats->seat_1 != null) bg-primary/[.6] @else bg-primary @endif">2</label>
+                                    <input type="radio" name="seat_id" id="seat-2" class="seat hidden " value="seat_1" @if($ride->seats->seat_1 != null) disabled @endif>
 
                                 </div>
+
                                 <div class="grid grid-cols-3 w-full md:w-1/4 mx-auto ">
-                                    <label for="seat-3" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">3</label>
-                                    <input type="radio" name="seat_id" id="seat-3" class="seat hidden " value="seat_2">
-                                    <label for="seat-4" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">4</label>
-                                    <input type="radio" name="seat_id" id="seat-4" class="seat hidden " value="seat_3">
-                                    <label for="seat-5" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">5</label>
-                                    <input type="radio" name="seat_id" id="seat-5" class="seat hidden " value="seat_4">
+                                    <label for="seat-3" class="block p-3 w-10 rounded text-light cursor-pointer  m-2 mx-auto @if($ride->seats->seat_2 != null) bg-primary/[.6] @else bg-primary @endif">3</label>
+                                    <input type="radio" name="seat_id" id="seat-3" class="seat hidden " value="seat_2" @if($ride->seats->seat_2 != null) disabled @endif>
+                                    <label for="seat-4" class="block p-3 w-10 rounded text-light cursor-pointer  m-2 mx-auto @if($ride->seats->seat_3 != null) bg-primary/[.6] @else bg-primary @endif">4</label>
+                                    <input type="radio" name="seat_id" id="seat-4" class="seat hidden " value="seat_3" @if($ride->seats->seat_3 != null) disabled @endif>
+                                    <label for="seat-5" class="block p-3 w-10 rounded text-light cursor-pointer m-2 mx-auto @if($ride->seats->seat_4 != null) bg-primary/[.6] @else bg-primary @endif">5</label>
+                                    <input type="radio" name="seat_id" id="seat-5" class="seat hidden " value="seat_4" @if($ride->seats->seat_4 != null) disabled @endif>
                                 </div>
                     @elseif ($ride->seat_totla == 7)
-                            <div class="grid grid-cols-2 w-full md:w-1/4 mx-auto ">
-                                <label for="seat-1" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary/[.6] m-2 mx-auto">1</label>
-                                <input type="radio" name="seat_id" id="seat-1" class="seat hidden " value="1" disabled>
-                                <label for="seat-2" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">2</label>
-                                <input type="radio" name="seat_id" id="seat-2" class="seat hidden " value="seat_1">
+                    <div class="grid grid-cols-2 w-full md:w-1/4 mx-auto ">
+                        <label for="seat-1" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary/[.6] m-2 mx-auto">1</label>
+                        <input type="radio" name="seat_id" id="seat-1" class="seat hidden " value="" disabled>
 
-                            </div>
+                        <label for="seat-2" class="block p-3 w-10 rounded text-light cursor-pointer  m-2 mx-auto @if($ride->seats->seat_1 != null) bg-primary/[.6] @else bg-primary @endif">2</label>
+                        <input type="radio" name="seat_id" id="seat-2" class="seat hidden " value="seat_1" @if($ride->seats->seat_1 != null) disabled @endif>
+
+                    </div>
+
+                    <div class="grid grid-cols-3 w-full md:w-1/4 mx-auto ">
+                        <label for="seat-3" class="block p-3 w-10 rounded text-light cursor-pointer  m-2 mx-auto @if($ride->seats->seat_2 != null) bg-primary/[.6] @else bg-primary @endif">3</label>
+                        <input type="radio" name="seat_id" id="seat-3" class="seat hidden " value="seat_2" @if($ride->seats->seat_2 != null) disabled @endif>
+                        <label for="seat-4" class="block p-3 w-10 rounded text-light cursor-pointer  m-2 mx-auto @if($ride->seats->seat_3 != null) bg-primary/[.6] @else bg-primary @endif">4</label>
+                        <input type="radio" name="seat_id" id="seat-4" class="seat hidden " value="seat_3" @if($ride->seats->seat_3 != null) disabled @endif>
+                        <label for="seat-5" class="block p-3 w-10 rounded text-light cursor-pointer m-2 mx-auto @if($ride->seats->seat_4 != null) bg-primary/[.6] @else bg-primary @endif">5</label>
+                        <input type="radio" name="seat_id" id="seat-5" class="seat hidden " value="seat_4" @if($ride->seats->seat_4 != null) disabled @endif>
+                    </div>
                             <div class="grid grid-cols-3 w-full md:w-1/4 mx-auto ">
-                                <label for="seat-3" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">3</label>
-                                <input type="radio" name="seat_id" id="seat-3" class="seat hidden " value="seat_2">
-                                <label for="seat-4" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">4</label>
-                                <input type="radio" name="seat_id" id="seat-4" class="seat hidden " value="seat_3">
-                                <label for="seat-5" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">5</label>
-                                <input type="radio" name="seat_id" id="seat-5" class="seat hidden " value="seat_4">
-                            </div>
-                            <div class="grid grid-cols-3 w-full md:w-1/4 mx-auto ">
-                                    <label for="seat-6" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">6</label>
-                                    <input type="radio" name="seat_id" id="seat-6" class="seat hidden " value="seat_5">
-                                    <label for="seat-7" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">7</label>
-                                    <input type="radio" name="seat_id" id="seat-7" class="seat hidden " value="seat_6">
-                                    <label for="seat-8" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto">8</label>
-                                    <input type="radio" name="seat_id" id="seat-8" class="seat hidden " value="seat_7">
+                                    <label for="seat-6" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto @if($ride->seats->seat_5 != null) bg-primary/[.6] @else bg-primary @endif">6</label>
+                                    <input type="radio" name="seat_id" id="seat-6" class="seat hidden " value="seat_5" @if($ride->seats->seat_5 != null) disabled @endif>
+                                    <label for="seat-7" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto @if($ride->seats->seat_6 != null) bg-primary/[.6] @else bg-primary @endif">7</label>
+                                    <input type="radio" name="seat_id" id="seat-7" class="seat hidden " value="seat_6" @if($ride->seats->seat_6 != null) disabled @endif>
+                                    <label for="seat-8" class="block p-3 w-10 rounded text-light cursor-pointer bg-primary m-2 mx-auto @if($ride->seats->seat_7 != null) bg-primary/[.6] @else bg-primary @endif">8</label>
+                                    <input type="radio" name="seat_id" id="seat-8" class="seat hidden " value="seat_7" @if($ride->seats->seat_7 != null) disabled @endif>
                             </div>
                             @endif
                     </div>
@@ -188,7 +194,7 @@
 
 
 
-</form>
+</div>
 
             @push('timer-scripts')
             <script>
@@ -250,6 +256,7 @@
                 var payment_method = paymentMethodValue;
                 let seat = seatValue;
                 var fee = $("#fee").val();
+                var seat_booked = $("#seat_booked").val();
 
 
 
@@ -264,7 +271,8 @@
                         ride_id: ride_id,
                         payment_method: payment_method,
                         seat_id:seat,
-                        fee:fee
+                        fee:fee,
+                        seat_booked:seat_booked
                     },
 
                     success: function(data) {
@@ -335,7 +343,7 @@
                         if(errorThrown == 'Unauthorized'){
 
                             iziToast.error({
-                                message: 'You are not loged in',
+                                message: 'Please login to book a ride',
                                 position: 'topCenter',
                                 color: '#dc3545',
                                 messageColor: '#fff',
@@ -343,8 +351,8 @@
                             });
 
                             setInterval(() => {
-                                window.location.replace({{ route('login') }} )
-                            }, 3000);
+                                window.location.replace('{{ route('login') }}')
+                            }, 4000);
                         };
                     }
 

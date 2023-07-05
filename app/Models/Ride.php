@@ -19,8 +19,7 @@ class Ride extends Model
         'car_image',
         'car_plate_number',
         'seat_total',
-        'seat_available',
-        'seat_arrangement',
+        'seat_booked',
         'year',
         'month',
         'day',
@@ -48,7 +47,7 @@ class Ride extends Model
     }
 
     public function seats(){
-        return $this->hasOne(Seat::class,'ride_id');
+        return $this->hasOne(Seat::class,'ride_id','ride_id');
     }
 
 }

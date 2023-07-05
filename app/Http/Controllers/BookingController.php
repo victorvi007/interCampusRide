@@ -17,29 +17,38 @@ class BookingController extends Controller
         return view('user.book',compact('ride'));
     }
 
-    public function store_booking(BookingRequest $bookingRequest,BookingRepository $bookingRepository,SeatRepository $seatRepository){
+    public function store_booking(BookingRequest $bookingRequest,BookingRepository $bookingRepository,SeatRepository $seatRepository,RideRepository $rideRepository)
+    {
 
         $checkForDuplicateBooking = $bookingRepository->checkForDuplicateBooking($bookingRequest);
-        // dd($checkForDuplicateBooking);
+        // dd();
+        $checkIfSeatIsAvailable = $rideRepository->checkIfRideIsFull($bookingRequest);
         if(!$checkForDuplicateBooking){
+            if($checkIfSeatIsAvailable != 0){
 
-            $booked = $bookingRepository->createBooking($bookingRequest);
-            $seatRepository->updateSeat($bookingRequest);
+                $booked = $bookingRepository->createBooking($bookingRequest);
+                $seatRepository->updateSeat($bookingRequest);
+                $rideRepository->updateBookedSeat($bookingRequest);
+                        if($booked){
+                            return response()->json([
+                                'msg' => 'Ride Booked Successfully',
+                                'status'=>'success',
+                                'next'=>'/log'
+                                        ]);
 
-                    if($booked){
-                        return response()->json([
-                            'msg' => 'Ride Booked Successfully',
-                            'status'=>'success',
-                            'next'=>'/booking/log'
-                                    ]);
+                        }else{
+                            return response()->json([
+                                'msg' => 'something went wrong, Try again',
+                                'status'=>'error',
 
-                    }else{
-                        return response()->json([
-                            'msg' => 'something went wrong, Try again',
-                            'status'=>'error',
-
-                                    ]);
-                    }
+                                        ]);
+                        }
+            }else{
+                return response()->json([
+                    'msg' => 'Sorry, This ride is full',
+                    'status'=>'warning'
+                ]);
+            }
 
 
 
@@ -50,5 +59,9 @@ class BookingController extends Controller
                 'status'=>'warning'
                         ]);
         }
+    }
+
+    public function booking_log(){
+        return view('user.booking_log');
     }
 }
