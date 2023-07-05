@@ -15,6 +15,7 @@ class UserRepository{
 
     public function createUser($data){
        return $this->model->create([
+            'user_id'=>userId(),
             'firstname'=>$data->firstname,
             'lastname'=>$data->lastname,
             'email'=>$data->email,

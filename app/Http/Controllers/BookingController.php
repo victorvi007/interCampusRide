@@ -23,26 +23,40 @@ class BookingController extends Controller
         $checkForDuplicateBooking = $bookingRepository->checkForDuplicateBooking($bookingRequest);
         // dd();
         $checkIfSeatIsAvailable = $rideRepository->checkIfRideIsFull($bookingRequest);
+
+        // check if user has already booked a ride before
         if(!$checkForDuplicateBooking){
+
+            // check if seat is available on the ride
             if($checkIfSeatIsAvailable != 0){
 
-                $booked = $bookingRepository->createBooking($bookingRequest);
-                $seatRepository->updateSeat($bookingRequest);
-                $rideRepository->updateBookedSeat($bookingRequest);
-                        if($booked){
-                            return response()->json([
-                                'msg' => 'Ride Booked Successfully',
-                                'status'=>'success',
-                                'next'=>'/log'
-                                        ]);
+                // check if user has sufficent balance to book
+                if(auth()->user()->balance >= $bookingRequest->fee && $bookingRequest->payment_method == 'on'){
 
-                        }else{
-                            return response()->json([
-                                'msg' => 'something went wrong, Try again',
-                                'status'=>'error',
+                    $booked = $bookingRepository->createBooking($bookingRequest);
+                    $seatRepository->updateSeat($bookingRequest);
+                    $rideRepository->updateBookedSeat($bookingRequest);
+                            if($booked){
+                                return response()->json([
+                                    'msg' => 'Ride Booked Successfully',
+                                    'status'=>'success',
+                                    'next'=>'/log'
+                                            ]);
 
-                                        ]);
-                        }
+                            }else{
+                                return response()->json([
+                                    'msg' => 'something went wrong, Try again',
+                                    'status'=>'error',
+
+                                            ]);
+                            }
+                }else{
+                    return response()->json([
+                        'msg' => 'Insufficent Balance',
+                        'status'=>'warning'
+                    ]);
+                }
+
             }else{
                 return response()->json([
                     'msg' => 'Sorry, This ride is full',

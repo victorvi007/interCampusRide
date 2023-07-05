@@ -9,9 +9,9 @@
         </div>
         <div class="right flex h-full w-full md:w-1/2 justify-center items-center overflow-y-scroll py-10 p-4">
                 <div class="w-full mx-2 md:w-2/3">
-            @foreach ($errors->all() as $error)
+            {{-- @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
-        @endforeach
+        @endforeach --}}
             <h1 class="text-5xl m-5 text-center font-extrabold">Sign In</h1>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
 
@@ -71,7 +71,7 @@
 
                     <div class="my-4 border border-primary rounded-md flex px-2 ">
                         <label for="confirmPassword" class="h-full my-auto flex items-center"> <i class="fa-solid fa-key text-primary"></i> </label>
-                        <input type="confirmPassword" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" class="w-full h-14 mx-2  outline-0 ">
+                        <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" class="w-full h-14 mx-2  outline-0 ">
                     </div>
 
                 </div>
@@ -85,10 +85,54 @@
                     <button class="text-light bg-primary p-4 rounded-md w-full">Sign Up</button>
                 </div>
                 <div class="">
-                    Already have an account? <a href="{{ route('login') }}" class="text-primary underline ">Sign In here</a>
+                    Already have an account? <a href="{{ route('login') }}" class="text-primary underline ">Sign In here</a>   Book a Ride <a href="{{ route('home') }}" class="text-primary underline text-end">Here</a>
+                </div>
+                <div class="text-end">
+                    Book a Ride <a href="{{ route('home') }}" class="text-primary underline ">Here</a>
                 </div>
            </div>
         </div>
     </div>
 </form>
+
+  @foreach ($errors->all() as $error)
+
+        @if ($error)
+            <script>
+                iziToast.error({
+                    message: `{{ $error }}`,
+                    position: 'topCenter',
+                    color: '#dc3545',
+                    messageColor: '#fff',
+                    theme: 'dark',
+
+
+                });
+            </script>
+        @endif
+    @endforeach
+
+    {{-- @if (Session::has('success'))
+        <script>
+            iziToast.success({
+                title: 'Caution',
+                message: `{{ Session::get('success') }}`,
+                position: 'topRight',
+                color: '#ffffff',
+
+            });
+        </script>
+    @endif --}}
+
+    {{-- @if (Session::has('error'))
+        <script>
+            iziToast.success({
+                title: 'Caution',
+                message: `{{ Session::get('error') }}`,
+                position: 'topRight',
+                color: '#ffffff',
+            });
+        </script>
+    @endif --}}
+
 @endsection

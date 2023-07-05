@@ -58,7 +58,7 @@ class RideFactory extends Factory
             'from'=> $from,
             'to'=> $to,
             'seat_total'=> 4,
-            'seat_booked'=> rand(1,2),
+            'seat_booked'=> 0,
             'year'=> date('Y'),
             'month'=> $setMonth,
             'day'=> $day,

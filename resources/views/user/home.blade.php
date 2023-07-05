@@ -6,7 +6,7 @@
 
 
             @foreach ($rides as $ride)
-                @if ($ride->seat_total - $ride->seat_booked != 0)
+                @if ($ride->seat_total - $ride->seat_booked > 0)
                     <div class="card my-4 pb-6">
                         <div
                             class="h-40 w-full"style="background-image:url('{{ $ride->banner }}'); background-size:cover;background-repeat:no-repeat">
