@@ -7,7 +7,7 @@ use App\Repository\RideRepository;
 use App\Repository\SeatRepository;
 use App\Http\Requests\BookingRequest;
 use App\Repository\BookingRepository;
-
+use App\Repository\UserRepository;
 
 class BookingController extends Controller
 {
@@ -17,7 +17,7 @@ class BookingController extends Controller
         return view('user.book',compact('ride'));
     }
 
-    public function store_booking(BookingRequest $bookingRequest,BookingRepository $bookingRepository,SeatRepository $seatRepository,RideRepository $rideRepository)
+    public function store_booking(BookingRequest $bookingRequest,BookingRepository $bookingRepository,SeatRepository $seatRepository,RideRepository $rideRepository,UserRepository $userRepository)
     {
 
         $checkForDuplicateBooking = $bookingRepository->checkForDuplicateBooking($bookingRequest);
@@ -36,7 +36,11 @@ class BookingController extends Controller
                     $booked = $bookingRepository->createBooking($bookingRequest);
                     $seatRepository->updateSeat($bookingRequest);
                     $rideRepository->updateBookedSeat($bookingRequest);
+                    $newBalance =  auth()->user()->balance - $bookingRequest->fee;
+                    $userRepository->deductRideFee($newBalance);
                             if($booked){
+                                // auth()->user->balance - $bookingRequest->fee
+
                                 return response()->json([
                                     'msg' => 'Ride Booked Successfully',
                                     'status'=>'success',

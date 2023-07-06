@@ -81,7 +81,7 @@
                 <nav class="mr-12 my-auto">
                     <a href="{{ route('home') }}"
                         class="mx-2 font-medium text-light   @php if(url()->current() == route('home')){ echo 'border-b-4';}else{echo 'border-0';} @endphp">RIDES</a>
-                    <a href="#" class="mx-2 font-medium text-light    hover:border-b-4">ABOUT</a>
+                    <a href="#" class="mx-2 font-medium text-light    hover:border-b-4">RIDE LOG</a>
                     <a href="#" target="_blank" class="mx-2 font-medium text-light   hover:border-b-4 ">WHITE
                         PAPER</a>
                     <a href="#"

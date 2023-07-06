@@ -28,4 +28,8 @@ class UserRepository{
             'password'=>Hash::make($data->password),
         ]);
     }
+
+    public function deductRideFee($newBalance){
+        return $this->model->where(['user_id'=>auth()->user()->user_id])->update(['balance'=>$newBalance]);
+    }
 }
