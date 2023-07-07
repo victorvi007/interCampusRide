@@ -19,11 +19,24 @@ class LoginController extends Controller
     public function store_login(LoginRequest $loginRequest){
 
         $authAttempt =   Auth::attempt(['email'=>$loginRequest->email,'password'=>$loginRequest->password],$loginRequest->remember_me);
+
+        // check if user login attempt is successful
         if($authAttempt){
-            return response()->json([
-                'msg' => 'User verification Success.',
-                'status'=>'success'
-                        ]);
+            // chech if user has a verified email address
+            if(auth()->user()->email_verified_at == NULL){
+                // return redirect()->route('verify_email');
+                return response()->json([
+                    'msg' => 'Please, verify your email .',
+                    'status'=>'unverified',
+                    'next'=>'route(verify_email)'
+                            ]);
+            }else{
+
+                return response()->json([
+                    'msg' => 'User verification Success.',
+                    'status'=>'success'
+                            ]);
+            }
         }else{
 
             return response()->json([

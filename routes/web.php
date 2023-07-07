@@ -31,6 +31,10 @@ Route::post('/logout',[LoginController::class,'logout'])->name('logout');
 
 Route::get('/booking/{id}',[BookingController::class, 'booking'])->name('booking');
 Route::middleware('auth')->group(function(){
+    // otp starts
+    Route::get('/verify-email',[RegisterController::class,'verify_email'])->name('verify_email');
+    Route::post('/otp-submit',[RegisterController::class,'otp_submit'])->name('otp_submit');
+    // otp ends
     Route::post('/store-booking',[BookingController::class,'store_booking'])->name('store_booking');
     Route::get('/log',[BookingController::class,'booking_log'])->name('booking_log');
 });

@@ -115,6 +115,20 @@
 
                         }
 
+                        if (data.status == 'unverified') {
+                            iziToast.success({
+                                message: data['msg'],
+                                position: 'topCenter',
+                                color: '#198754',
+                                messageColor: '#fff',
+                                theme: 'dark',
+                            });
+
+                            setInterval(() => {
+                                window.location.replace('{{ route('verify_email') }}');
+                            }, 3000);
+                        }
+
 
 
 

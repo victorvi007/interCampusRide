@@ -29,7 +29,51 @@
 <body>
     @yield('content')
 
+    @if(Session::has('success'))
+    <script>
+        iziToast.success({
+            message: '{{ Session::get('success') }}',
+            position: 'topCenter',
+            color: '#dc3545',
+            messageColor: '#fff',
+            theme: 'dark',
+        });
 
+    </script>
+@endif
+
+    @if(Session::has('error'))
+    <script>
+        iziToast.error({
+            message: '{{ Session::get('error') }}',
+            position: 'topCenter',
+            color: '#dc3545',
+            messageColor: '#fff',
+            theme: 'dark',
+        });
+
+    </script>
+@endif
+
+@foreach($errors->all() as $error)
+
+@if($error)
+<script>
+    iziToast.error({
+        message: '{{ $error }}',
+        position: 'topCenter',
+        color: '#dc3545',
+        messageColor: '#fff',
+        theme: 'dark',
+    });
+
+</script>
+@endif
+
+
+
+
+@endforeach
 </body>
 
 </html>

@@ -30,3 +30,16 @@ function userId($length = 6){
     return $randomString;
 
 }
+
+function otp($length = 5){
+    $characters = '1234567899876543216574839023456765432';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+
+}
+
+

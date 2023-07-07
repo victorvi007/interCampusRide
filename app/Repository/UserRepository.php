@@ -32,4 +32,8 @@ class UserRepository{
     public function deductRideFee($newBalance){
         return $this->model->where(['user_id'=>auth()->user()->user_id])->update(['balance'=>$newBalance]);
     }
+
+    public function verifyEmail(){
+        return $this->model->where(['id'=>auth()->user()->id])->update(['email_verified_at'=>date('Y-m-d H:i:s')]);
+    }
 }
