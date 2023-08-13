@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\RidesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,11 @@ use App\Http\Controllers\Auth\RegisterController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+
+Route::get('/mail',[UserController::class,'mail'])->name('mail');
+
 
 Route::get('/',[UserController::class,'home'])->name('home');
 
@@ -37,4 +43,9 @@ Route::middleware('auth')->group(function(){
     // otp ends
     Route::post('/store-booking',[BookingController::class,'store_booking'])->name('store_booking');
     Route::get('/log',[BookingController::class,'booking_log'])->name('booking_log');
+
+    // * Create Ride Starts Here
+    Route::get('/create-ride',[RidesController::class,'create_ride'])->name('create_ride');
+    Route::post('/store-create-ride',[RidesController::class,'store_create_ride'])->name('store_create_ride');
+    // * Create Ride Ends Here
 });

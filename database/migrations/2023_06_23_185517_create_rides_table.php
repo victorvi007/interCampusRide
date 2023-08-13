@@ -27,15 +27,16 @@ return new class extends Migration
             $table->string('year');
             $table->string('month');
             $table->string('day');
-            $table->string('countdown');
+            $table->string('depature_time');
+            $table->string('arrival_time');
             $table->string('depature_hour');
             $table->string('depature_minuite');
-            $table->string('depature_second');
+            $table->string('depature_second')->default(00);
             $table->string('depature_meridiem');
-            $table->string('eta_hour');
-            $table->string('eta_minuite');
-            $table->string('eta_second');
-            $table->string('eta_meridiem');
+            $table->string('arrival_hour');
+            $table->string('arrival_minuite');
+            $table->string('arrival_second')->default(00);
+            $table->string('arrival_meridiem');
             $table->timestamps();
         });
     }

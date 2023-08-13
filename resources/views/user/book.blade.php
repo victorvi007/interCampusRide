@@ -8,7 +8,7 @@
 
 
     <div class="screen w-full ">
-        <div class="h-52 w-full"style="background-image:url('{{ $ride->banner }}'); background-size:cover;background-repeat:no-repeat" ></div>
+        <div class="h-52 w-full"style="background-image:url({{asset( $ride->banner) }}); background-size:cover;background-repeat:no-repeat;background-position:center;" ></div>
 
         <div class="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-5 gap-4  m-4 md:mx-8">
 
@@ -19,8 +19,8 @@
                 <div class="profile order my-4">
                     <div class="">
                         <img src="{{ $ride->user->avater }}" class="h-42  w-42 m-1" alt="">
-                        <h2 class="my-auto  text-2xl"> <i class="fa-light fa-signature mx-2 text-primary"></i>{{ $ride->user->firstname }} {{ $ride->lastname }}</h2>
-                        <p class="my-2"> <i class="fa-solid fa-phone-rotary mx-2 text-primary"></i> +234 812 0844 654</p>
+                        <h2 class="my-auto  text-2xl"> <i class="fa-light fa-signature mx-2 text-primary"></i>{{ $ride->user->firstname }} {{ $ride->user->lastname }}</h2>
+                        <p class="my-2"> <i class="fa-solid fa-phone-rotary mx-2 text-primary"></i> {{ $ride->user->phone }}</p>
                         <p class="my-2"> <i class="fa-sharp fa-solid fa-location-dot mx-2 text-primary"></i> {{ $ride->user->address }}</p>
                         <p class="my-2"> <i class="fa-light fa-id-badge mx-2 text-primary"></i> {{ $ride->user->reg_number }}</p>
                         <p class="my-2"> <i class="fa-solid fa-school mx-2 text-primary"></i> {{ $ride->user->faculty }}</p>
@@ -41,7 +41,7 @@
                     <div class="title flex justify-between px-4 mt-4">
                         <div class="flex">
                             <img src="{{ $ride->user->avater }}" class="h-16 rounded-full w-16 rounded-full m-1" alt="">
-                            <p class="my-auto font-bold text-sm">{{ $ride->user->firstname }} {{ $ride->lastname }}</p>
+                            <p class="my-auto font-bold text-sm">{{ $ride->user->firstname }} {{ $ride->user->lastname }}</p>
                         </div>
                         <div class="my-auto">
                             <p id="countDown-{{ $ride->id }}"></p>
@@ -68,8 +68,8 @@
 
                     </div>
                         <div class="arrival-time">
-                            <h4 class="font-bold text-xl">{{ $ride->eta_hour }}:{{ $ride->eta_minuite }}:<span
-                                class="text-xs font-semibold">{{ $ride->eta_meridiem }}</span></h4>
+                            <h4 class="font-bold text-xl">{{ $ride->arrival_hour }}:{{ $ride->arrival_minuite }}:<span
+                                class="text-xs font-semibold">{{ $ride->arrival_meridiem }}</span></h4>
                             <p class=" text-xs font-semibold text-end">{{ $ride->to }}</p>
                         </div>
                     </div>

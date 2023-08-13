@@ -1,0 +1,51 @@
+{
+    "JAN": {
+      "country": "January",
+      "dial_code": "1"
+    },
+    "FEB": {
+      "country": "February",
+      "dial_code": "2"
+    },
+    "MAR": {
+      "country": "March",
+      "dial_code": "3"
+    },
+    "APR": {
+      "country": "April",
+      "dial_code": "4"
+    },
+    "MAY": {
+      "country": "May",
+      "dial_code": "5"
+    },
+    "JUN": {
+      "country": "June",
+      "dial_code": "6"
+    },
+    "JUL": {
+      "country": "July",
+      "dial_code": "7"
+    },
+    "AUG": {
+      "country": "August",
+      "dial_code": "8"
+    },
+    "SEP": {
+      "country": "September",
+      "dial_code": "9"
+    },
+    "OCT": {
+      "country": "October",
+      "dial_code": "10"
+    },
+    "NOV": {
+      "country": "November",
+      "dial_code": "11"
+    },
+    "DEC": {
+      "country": "December",
+      "dial_code": "12"
+    }
+
+}

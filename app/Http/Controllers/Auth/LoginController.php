@@ -19,6 +19,7 @@ class LoginController extends Controller
     public function store_login(LoginRequest $loginRequest){
 
         $authAttempt =   Auth::attempt(['email'=>$loginRequest->email,'password'=>$loginRequest->password],$loginRequest->remember_me);
+        // $authAttempt =   Auth::attempt($loginRequest->only('email','password'),$loginRequest->remember_me);
 
         // check if user login attempt is successful
         if($authAttempt){

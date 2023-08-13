@@ -10,9 +10,10 @@ class SeatRepository{
     $this->model = $model;
    }
 
-   public function createSeat($data){
+   public function createSeat($ride_id){
+
     return $this->model->create([
-        'ride_id'=>$data->ride_id,
+        'ride_id'=>$ride_id,
 
     ]);
    }

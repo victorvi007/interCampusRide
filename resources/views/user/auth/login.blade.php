@@ -202,7 +202,7 @@
 
     @push('script')
         <script>
-            $('#submit').on('keypress', function(e) {
+            $('#submitBtn').on('keypress', function(e) {
                 return e.which !== 32;
             });
         </script>

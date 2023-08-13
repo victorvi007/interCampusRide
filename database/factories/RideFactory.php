@@ -17,6 +17,7 @@ class RideFactory extends Factory
     public function definition(): array
     {
         $depatureHour = rand(4,6);
+        $arrivalHour = rand(7,9)+rand(1,5);
 
         $from = 'UNEC';
         $to = 'UNN';
@@ -33,18 +34,30 @@ class RideFactory extends Factory
             $second = rand(0,59);
             $setMeridiam = $meridiem[rand(0,1)];
 
-            $data = [
+            $data1 = [
+                'month'=> $setMonth,
+                'day' => $day,
+                'year'=>$year,
+                'depature_hour'=>$arrivalHour,
+                'depature_minuite'=>$minuite,
+                'second'=>$second,
+                'depature_meridiem'=>$setMeridiam,
+
+            ];
+
+            $data2 = [
 
                 'month'=> $setMonth,
                 'day' => $day,
                 'year'=>$year,
-                'eta_hour'=>$hour,
-                'eta_minuite'=>$minuite,
-                'eta_second'=>$second,
-                'eta_meridiem'=>$setMeridiam
+                'arrival_hour'=>$hour,
+                'arrival_minuite'=>$minuite,
+                'second'=>$second,
+                'arrival_meridiem'=>$setMeridiam
 
             ];
-            $countdown = countDownTimer($data);
+            $depature_time = depature_time($data1);
+            $arrival_time = arrival_time($data2);
 
 
         return [
@@ -67,11 +80,12 @@ class RideFactory extends Factory
             'depature_second'=> rand(0,59),
             'depature_meridiem'=>$setMeridiam,
 
-            'eta_hour'=> $depatureHour +rand(1,5),
-            'eta_minuite'=> rand(0,59),
-            'eta_second'=> rand(0,59),
-            'eta_meridiem'=>$setMeridiam,
-            'countdown'=> $countdown,
+            'arrival_hour'=> $arrivalHour,
+            'arrival_minuite'=> rand(0,59),
+            'arrival_second'=> rand(0,59),
+            'arrival_meridiem'=>$setMeridiam,
+            'depature_time'=> $depature_time,
+            'arrival_time'=> $arrival_time,
 
         ];
 

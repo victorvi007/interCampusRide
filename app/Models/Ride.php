@@ -13,6 +13,8 @@ class Ride extends Model
 
         'user_id',
         'ride_id',
+        'from',
+        'to',
         'banner',
         'price',
         'info',
@@ -28,10 +30,12 @@ class Ride extends Model
         'depature_minuite',
         'depature_second',
         'depature_meridiem',
-        'eta_hour',
-        'eta_minuite',
-        'eta_second',
-        'eta_meridiem',
+        'arrival_hour',
+        'arrival_minuite',
+        'arrival_second',
+        'arrival_meridiem',
+        'depature_time',
+        'arrival_time',
 
     ];
 

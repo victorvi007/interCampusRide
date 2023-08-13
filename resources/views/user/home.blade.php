@@ -9,7 +9,7 @@
                 @if ($ride->seat_total - $ride->seat_booked > 0)
                     <div class="card my-4 pb-6">
                         <div
-                            class="h-40 w-full"style="background-image:url('{{ $ride->banner }}'); background-size:cover;background-repeat:no-repeat">
+                            class="h-40 w-full"style="background-image:url('{{ $ride->banner }}'); background-size:cover;background-repeat:no-repeat;background-position:center">
                         </div>
                         <div class="title flex justify-between px-4 mt-4">
                             <div class="flex">
@@ -34,8 +34,8 @@
                                 <i class="car fa-solid fa-car-side"></i>
                             </div>
                             <div class="arrival-time">
-                                <h4 class="font-bold text-xl">{{ $ride->eta_hour }}:{{ $ride->eta_minuite }}:<span
-                                        class="text-xs font-semibold">{{ $ride->eta_meridiem }}</span></h4>
+                                <h4 class="font-bold text-xl">{{ $ride->arrival_hour }}:{{ $ride->arrival_minuite }}:<span
+                                        class="text-xs font-semibold">{{ $ride->arrival_meridiem }}</span></h4>
                                 <p class=" text-xs font-semibold text-end">{{ $ride->to }}</p>
                             </div>
                         </div>

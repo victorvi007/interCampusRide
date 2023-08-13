@@ -22,7 +22,7 @@
         }
     </style>
     @stack('script')
-    @stack('timer-scripts')
+    {{-- @stack('timer-scripts') --}}
     <title>Document</title>
 </head>
 
@@ -81,7 +81,7 @@
                 <nav class="mr-12 my-auto">
                     <a href="{{ route('home') }}"
                         class="mx-2 font-medium text-light   @php if(url()->current() == route('home')){ echo 'border-b-4';}else{echo 'border-0';} @endphp">RIDES</a>
-                    <a href="#" class="mx-2 font-medium text-light    hover:border-b-4">RIDE LOG</a>
+                    <a href="{{ route('create_ride') }}" class="mx-2 font-medium text-light    hover:border-b-4">CREATE RIDE</a>
                     <a href="#" target="_blank" class="mx-2 font-medium text-light   hover:border-b-4 ">WHITE
                         PAPER</a>
                     <a href="#"
@@ -139,47 +139,54 @@
     <script src="{{ asset('assets/js/nav.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
-    @push('script')
-        @foreach ($errors->all() as $error)
-            @if ($error)
-                <script>
-                    iziToast.success({
-                        title: 'Caution',
-                        message: `{{ $error }}`,
-                        position: 'topRight',
-                        color: 'red',
-                    });
-                </script>
-            @endif
-        @endforeach
+    @if(Session::has('success'))
+    <script>
+        iziToast.success({
+            message: '{{ Session::get('success') }}',
+            position: 'topCenter',
+            color: '#dc3545',
+            messageColor: '#fff',
+            theme: 'dark',
+        });
 
-        @if (Session::has('success'))
-            <script>
-                iziToast.success({
-                    title: 'Caution',
-                    message: `{{ Session::get('success') }}`,
-                    position: 'topRight',
-                    color: '#ffffff',
-                });
-            </script>
-        @endif
+    </script>
+@endif
 
-        @if (Session::has('error'))
-            <script>
-                iziToast.success({
-                    title: 'Caution',
-                    message: `{{ Session::get('error') }}`,
-                    position: 'topRight',
-                    color: '#ffffff',
-                });
-            </script>
-        @endif
+    @if(Session::has('error'))
+    <script>
+        iziToast.error({
+            message: '{{ Session::get('error') }}',
+            position: 'topCenter',
+            color: '#dc3545',
+            messageColor: '#fff',
+            theme: 'dark',
+        });
+
+    </script>
+@endif
+
+@foreach($errors->all() as $error)
+
+@if($error)
+<script>
+    iziToast.error({
+        message: '{{ $error }}',
+        position: 'topCenter',
+        color: '#dc3545',
+        messageColor: '#fff',
+        theme: 'dark',
+    });
+
+</script>
+@endif
+
+@endforeach
         <script>
                  $('#submit').on('keypress', function(e) {
                         return e.which !== 32;
                     });
         </script>
-    @endpush
+
 </body>
 
 </html>

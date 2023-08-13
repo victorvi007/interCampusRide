@@ -3,6 +3,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/assets/storage/images
 /public/assets/fontawesome
 /storage/*.key
 /vendor

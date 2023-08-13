@@ -16,9 +16,9 @@
                 </div>
                 <!-- Modal body -->
                 <div class="p-2 space-y-6">
-                  <a href="{{ $ride->plate_number }}">
+                  <a href="{{ asset($ride->plate_number) }}">
 
-                      <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 h-96 rounded" style="background-image: url('assets/images/background.jpg');">
+                      <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400 h-96 rounded" style="background-image: url('{{ asset($ride->car_plate_number) }}');background-repeat:no-repeat; background-size:cover;background-position:center;">
 
                       </p>
                   </a>

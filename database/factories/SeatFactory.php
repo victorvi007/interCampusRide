@@ -17,7 +17,7 @@ class SeatFactory extends Factory
     public function definition(): array
     {
         return [
-           'ride_id'=>'name'
+           'ride_id'=>'8a8vjhsumxkt'
         ];
     }
 }
